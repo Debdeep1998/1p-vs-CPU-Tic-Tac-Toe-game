@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 int a[3][3];
@@ -23,10 +22,10 @@ int min(int n,int b)
 
 void init()
 {
-
-	for(int i=0;i<3;i++)
+	int i,j;
+	for(i=0;i<3;i++)
 	{
-		for(int j=0;j<3;j++)
+		for(j=0;j<3;j++)
 		{
 			a[i][j]=-1;
 		}
@@ -34,10 +33,10 @@ void init()
 }
 int isempty(int g[][3])
 {
-
-	for(int m=0;m<3;m++)
+	int m,l;
+	for(m=0;m<3;m++)
 	{
-		for(int l=0;l<3;l++)
+		for(l=0;l<3;l++)
 		{
 			if(g[m][l]==-1)
 			{
@@ -67,8 +66,9 @@ void display()
  
 int iswin(int b[3][3])
 {
-    // Checking for Rows for X or O victory.
-    for (int row = 0; row<3; row++)
+    int row;
+    int col;
+    for ( row = 0; row<3; row++)
     {
         if (b[row][0]==b[row][1] &&
             b[row][1]==b[row][2])
@@ -81,7 +81,7 @@ int iswin(int b[3][3])
     }
  
     // Checking for Columns for X or O victory.
-    for (int col = 0; col<3; col++)
+    for (col = 0; col<3; col++)
     {
         if (b[0][col]==b[1][col] &&
             b[1][col]==b[2][col])
@@ -114,10 +114,10 @@ int iswin(int b[3][3])
     // Else if none of them have won then return 0
     return 0;
 }
-int minimax(int player,int h[][3])
+int minimax(int player,int depth,int h[][3])
 {
-
 	
+	int best,i,j,k,l;
 	if(iswin(h)==10)
 	{
 		return 10;
@@ -132,15 +132,15 @@ int minimax(int player,int h[][3])
 	}
 	if (player==0)
 	{
-		int best=99;
-		for(int i=0;i<3;i++)
+		best=99;
+		for(i=0;i<3;i++)
 		{
-			for(int j=0;j<3;j++)
+			for(j=0;j<3;j++)
 			{
 				if(h[i][j]==-1)
 				{
 					h[i][j]=0;
-					best=min(best,minimax(1,h));
+					best=min(best,minimax(1,depth+1,h));
 				
 					h[i][j]=-1;
 				}
@@ -150,15 +150,15 @@ int minimax(int player,int h[][3])
 	}
 	if (player==1)
 	{
-		int best=-99;
-		for(int k=0;k<3;k++)
+		best=-99;
+		for(k=0;k<3;k++)
 		{
-			for(int l=0;l<3;l++)
+			for(l=0;l<3;l++)
 			{
 				if(h[k][l]==-1)
 				{
 					h[k][l]=1;
-					best=max(best,minimax(0,h));
+					best=max(best,minimax(0,depth+1,h));
 					h[k][l]=-1;
 				}
 			}
@@ -173,15 +173,15 @@ void bot()
 	int movex=-1;
 	int movey=-1;
 	int score;
-	
-	for(int m=0;m<3;m++)
+	int m,n;
+	for(m=0;m<3;m++)
 	{
-		for(int n=0;n<3;n++)
+		for(n=0;n<3;n++)
 		{
 			if(a[m][n]==-1)
 			{
 				a[m][n]=0;
-				 score=minimax(1,a);
+				 score=minimax(1,0,a);
 				if(score<bestval)
 				{
 					bestval=score;
@@ -206,7 +206,7 @@ void user()
 }
 void main()
 {
-  
+
 	int t;
 	init();
 	printf("Press 1:for user input\nPress 0:for bot input\n");
@@ -243,7 +243,5 @@ void main()
 		exit(0);
 	}
 	
-	}
+	}	
 }
-
-
