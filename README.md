@@ -1,2 +1,2 @@
-#1 An unbeatable tic tac toe game using minimax algorithm written and executed on the mother language,c.# tic-tac-toe
-#2 Turn wise candy picking(1 or 4 candies) game from a jar where the program outputs either "yes" or "no" indicating if the player who starts wins or not ,given the number of candies as input. 
+The game has been designed and implemented using minimax algorithm,a deterministic backtracking algorithm which enables the computer to figure out the best possible moves(the game will either result in a draw or a sure victory for the bot(computer)in this case).It works based on a backtracking approach which chooses an appropriate move for the computer by probing through all possible game states at each stage of the game,or after each player input.
+Improvements and Optimizations are most welcome.Thank you.
